@@ -24,6 +24,12 @@ class stdController extends Controller
     
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|alpha|max:20',
+            'phone' => 'required|Numeric|min:10',
+            'email' => 'required|email|max:20',
+               'age' => 'required|Numeric',
+        ]);
        $input=$request->all();
        student::create($input);
        return redirect('student')->with('flash_message','student added');
@@ -47,6 +53,12 @@ class stdController extends Controller
     
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|alpha|max:20',
+            'phone' => 'required|Numeric|min:10',
+            'email' => 'required|email|max:20',
+               'age' => 'required|Numeric',
+        ]);
         $student=student::find($id);
         $input=$request->all();
         $student->update($input);
